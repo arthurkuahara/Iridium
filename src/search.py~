@@ -1,0 +1,15 @@
+from math import log
+
+
+def search(index,querry,number_of_docs):
+    
+    vectorial_space = {}
+    
+    for terms in index.keys():
+        for document in index.db[term]:
+            if document.
+        
+        
+        
+        
+
