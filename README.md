@@ -1,4 +1,4 @@
-### Welcome to Iridium!
+### Iridium
 
 Iridium is a search engine built in Python, proposed as a final project in the DCC204 - Programming and Software Development II class at UFMG.
 You can find the original proposition for the project in a PDF file stored in the repository. It is in portuguese though!
