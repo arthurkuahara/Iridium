@@ -1,16 +1,14 @@
 from document import *
+from os import listdir
+from os.path import isfile, join
 from inverted_index import InvertedIndex
 
 def exec():
-    
     ii = InvertedIndex()
-    test_doc = Document("../data/abc")
-    test_doc2 = Document("../data/a") 
-    ii.add_document(test_doc)
-    ii.add_document(test_doc2)
+    for file in [f for f in listdir('../data') if isfile(join('../data', f))]:
+        document_ = Document('../data/'+file)
+        ii.add_document(document_)
     print(ii.db)
-    ii.querry('r')
-
-    
+    ii.querry('a r e')
 
 exec()
