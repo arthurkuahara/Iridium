@@ -20,48 +20,48 @@ class InvertedIndex:
                     else:
                         self.db[term]  = {document.id:term_count[term]}
                         
-                for term in (term for term in self.db if term not in term_count):
-                    self.db[term][document.id] = 0
+              
                         
-        def querry(self,q):
-            # add querry to ii database
-            doc_q = Querry(q)
-            self.add_document(doc_q)
-            
-            explored = set()
-            sim_table = dict()
-            
-            sum_w_doc    = 0
-            sum_w_querry = 0
-            dot_product  = 0
-            
-            n = len(self.dl)
-            
-            for doc in set(doc for doc in self.dl if doc not in explored):
-               for term in self.db:
-                   doc_product  += self.W(self.db[term][doc],n,len(self.db[term])) * self.W(self.db[term][doc_q.id],n,len[term])
-                   sum_w_doc    += pow(self.db[term][doc],2)
-                   sum_w_querry += pow(self.db[term][doc_q.id],2)
-                sim = doc_product / (sqrt(sum_w_doc) * sqrt(sum_w_querry))
-                sim_table[doc] = sim
-                explored.add(doc)
-            
-            return sim_table
-            
-        @staticmethod
-        def W(freq,n,nx):
-            idf = log((n/nx),10)
-            return freq * idf
-        
-        
-            dirty_text = text
-            clean_text = dirty_text.translate(dirty_text.maketrans('','',string.punctuation))
-            ok_text = clean_text.lower()
-            querry_dict = dict(Counter(ok_text))
-            return querry_dict
-            
-            
-       
+        def querry(self,querry):
+            def W(tf,nx):
+                    idf = log(len(self.dl)/nx,10)
+                    return idf * tf
+
+            querry_dict = dict(Counter(querry))
+
+            for term in self.db:
+                if term not in querry_dict:
+                    querry_dict.update({term:0})
+
+
+            term_set = set(self.db)
+
+            norm_querry = 0
+            norm_document = 0
+            dot_product = 0
+
+            print("{}{}".format('querry',querry_dict))
+            for document in self.dl:
+                norm_querry = 0
+                norm_document = 0
+                dot_product = 0 
+                document_dict = dict()
+                for term in term_set.union(set(querry)):
+                    if term in self.db:
+                        print(term)
+                        # norm_querry += pow(W(querry_dict[term],len(self.db[term])),2)
+                        # norm_document += pow(W(document_dict[term],len(self.db[term])),2)
+                        # dot_product += W(querry_dict[term],len(self.db[term])) * W(document_dict[term],len(self.db[term]))
+                    else:
+                        norm_querry += pow(W(querry_dict[term],1),2)
+                        norm_document += pow(W(document_dict[term],1),2)
+                        dot_product += W(querry_dict[term],1) * W(document_dict[term],1)
+
+                print(dot_product / (sqrt(norm_querry) * sqrt(norm_document)))
+               
+                print(document_dict)
                 
-                
-                
+            print(querry_dict)
+
+
+

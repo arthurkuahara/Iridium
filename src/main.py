@@ -2,10 +2,15 @@ from document import *
 from inverted_index import InvertedIndex
 
 def exec():
+    
     ii = InvertedIndex()
-    new_doc = Querry("A B C")
-    ii.add_document(new_doc)
-    ii.querry('A')
+    test_doc = Document("../data/abc")
+    test_doc2 = Document("../data/a") 
+    ii.add_document(test_doc)
+    ii.add_document(test_doc2)
+    print(ii.db)
+    ii.querry('r')
+
     
 
 exec()
