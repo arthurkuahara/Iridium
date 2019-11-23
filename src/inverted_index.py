@@ -36,7 +36,7 @@ class InvertedIndex:
                     sum(
                         (pow(W(querry_dict[term],len(self.db[term])),2) for term in querry_dict)
                         ))
-            
+            sim_table = {}
             for document in self.dl:
                 document_dict = dict()
                 for term in self.db:
@@ -51,7 +51,12 @@ class InvertedIndex:
                 dot_product = sum(
                     ( (W(document_dict[term],len(self.db[term])) * W(querry_dict[term],len(self.db[term])) ) for term in self.db )
                 )
-                print("{} {} {} {}".format(document_dict,norm_querry,norm_document,dot_product))
+
+                sim = dot_product / (norm_document * norm_querry)
+                sim_table.update({document:sim})
+                # print("{} {} {} {} ".format(document,norm_querry,norm_document,dot_product))
+            return sim_table
+                
 
 
             
